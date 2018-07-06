@@ -4,6 +4,4 @@ import net.sleepyviking.gjsb2.controller.Controller;
 
 public abstract class Model {
 
-	Controller controller;
-
 }

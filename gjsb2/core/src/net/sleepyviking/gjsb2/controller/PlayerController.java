@@ -2,14 +2,17 @@ package net.sleepyviking.gjsb2.controller;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.math.Vector2;
 import net.sleepyviking.gjsb2.model.Player;
 
 public class PlayerController extends EntityController{
 
-	Player player;
-
 	PlayerController(Player player){
-		this.player = player;
+		this.addEntity(player);
+	}
+
+	PlayerController(){
+		this.addEntity(new Player(new Vector2(0,0)));
 	}
 
 	@Override

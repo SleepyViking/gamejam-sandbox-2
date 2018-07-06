@@ -9,20 +9,21 @@ public class Entity extends Model{
 	Vector2 vel;
 
 	public Entity(){
-		//pos = new Vector2(0, 0);
-	}
-
-	public Entity(Vector2 pos, Controller controller){
-		this.pos = pos;
-		this.controller = controller;
+		this.pos = new Vector2();
+		this.vel = new Vector2();
 	}
 
 	public Entity(Vector2 pos){
+		this.pos = new Vector2();
+		this.vel = new Vector2();
 		setPos(pos);
 	}
 
-	public void setController(Controller c){
-		this.controller = c;
+	public Entity(Vector2 pos, Vector2 vel){
+		this.pos = new Vector2();
+		this.vel = new Vector2();
+		setPos(pos);
+		setVel(pos);
 	}
 
 	public Vector2 getPos(){
@@ -34,7 +35,7 @@ public class Entity extends Model{
 	}
 
 	public void setVel(Vector2 vel) {
-		this.vel = vel;
+		this.vel.set(vel);
 	}
 
 	public void setPos(Vector2 pos){
