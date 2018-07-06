@@ -12,14 +12,12 @@ import net.sleepyviking.gjsb2.model.World;
 public class WorldRenderer {
 
     private SpriteBatch spriteBatch;
-
     private OrthographicCamera camera;
     private Vector2 viewPort;
 
     private World world;
 
-    private Texture playerTexture = new Texture("player.png");
-
+    //initializes the objects needed
     public WorldRenderer(World world){
         spriteBatch = new SpriteBatch();
 
@@ -31,6 +29,8 @@ public class WorldRenderer {
         this.world = world;
     }
 
+
+    //does the rendering
     public void render(){
 
         Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
