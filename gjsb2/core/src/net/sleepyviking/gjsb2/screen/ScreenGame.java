@@ -9,7 +9,7 @@ import net.sleepyviking.gjsb2.model.World;
 import net.sleepyviking.gjsb2.view.WorldRenderer;
 
 
-public class ScreenGame extends ScreenBase implements InputProcessor {
+public class ScreenGame extends ScreenBase{
 
     //world variables
     private World world;
@@ -22,9 +22,6 @@ public class ScreenGame extends ScreenBase implements InputProcessor {
         world = new World();
         worldController = new WorldController(world);
         worldRenderer = new WorldRenderer(world);
-
-        Gdx.input.setInputProcessor(this);
-
     }
 
     //rendering world variables
@@ -35,49 +32,5 @@ public class ScreenGame extends ScreenBase implements InputProcessor {
             worldController.update(delta);
             worldRenderer.render();
         }
-    }
-
-/*
-* Class that renders game-world variables
-*/
-
-    @Override
-    public boolean keyDown(int keycode) {
-        return false;
-    }
-
-    @Override
-    public boolean keyUp(int keycode) {
-        return false;
-    }
-
-    @Override
-    public boolean keyTyped(char character) {
-        return false;
-    }
-
-    @Override
-    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        return false;
-    }
-
-    @Override
-    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        return false;
-    }
-
-    @Override
-    public boolean touchDragged(int screenX, int screenY, int pointer) {
-        return false;
-    }
-
-    @Override
-    public boolean mouseMoved(int screenX, int screenY) {
-        return false;
-    }
-
-    @Override
-    public boolean scrolled(int amount) {
-        return false;
     }
 }
