@@ -6,7 +6,7 @@ public class WorldController extends Controller{
 
 	World world;
 
-	WorldController(World world){
+	public WorldController(World world){
 		this.world = world;
 	}
 
