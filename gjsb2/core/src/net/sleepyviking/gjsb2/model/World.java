@@ -6,11 +6,12 @@ import com.badlogic.gdx.utils.Array;
 
 public class World {
 
-	private Vector2 viewPort;
+	private final static Vector2 VIEWPORT = new Vector2(10,10);
 	private OrthographicCamera camera;
 
 	public World(){
 
+		this.camera = new OrthographicCamera();
 	}
 
 	public OrthographicCamera getCamera(){
@@ -18,7 +19,7 @@ public class World {
 	}
 
 	public Vector2 getViewport(){
-		return viewPort;
+		return VIEWPORT;
 	}
 
 
