@@ -5,7 +5,7 @@ import net.sleepyviking.gjsb2.model.Entity;
 
 public class EntityController extends Controller {
 
-	public Array<Entity> entities;
+	private Array<Entity> entities;
 
 	@Override
 	public void update(float dt) {
@@ -14,6 +14,10 @@ public class EntityController extends Controller {
 			e = entities.get(i);
 			e.getPos().add(e.getVel().scl(dt));
 		}
+	}
+
+	public void addEntity(Entity e){
+		entities.add(e);
 	}
 
 }

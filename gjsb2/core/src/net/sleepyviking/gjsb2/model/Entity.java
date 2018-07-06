@@ -7,14 +7,14 @@ import net.sleepyviking.gjsb2.controller.Controller;
 public class Entity extends Model{
 	Vector2 pos;
 	Vector2 vel;
-	Controller controller;
 
 	public Entity(){
-		pos = new Vector2(0, 0);
+		//pos = new Vector2(0, 0);
 	}
 
 	public Entity(Vector2 pos, Controller controller){
-
+		this.pos = pos;
+		this.controller = controller;
 	}
 
 	public Entity(Vector2 pos){
