@@ -19,10 +19,10 @@ public class WorldController extends Controller{
 
 	@Override
 	public void update(float dt) {
+		playerController.update(dt);
+		entityController.update(dt);
 
 	}
-
-
 
 	public PlayerController getPlayerController() {
 		return playerController;
