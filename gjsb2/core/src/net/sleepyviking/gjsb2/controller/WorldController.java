@@ -6,12 +6,15 @@ public class WorldController extends Controller{
 
 	World world;
 
+<<<<<<< HEAD
 
 	PlayerController playerController;
 	EntityController entityController;
 
 
 
+=======
+>>>>>>> 67609f1b582f4e7e7c0cf5fee53f8fd30b299187
 	public WorldController(World world){
 		this.world = world;
 
