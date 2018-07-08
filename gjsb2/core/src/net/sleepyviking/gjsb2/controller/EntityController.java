@@ -5,7 +5,11 @@ import net.sleepyviking.gjsb2.model.Entity;
 
 public class EntityController extends Controller {
 
-	private Array<Entity> entities;
+	protected Array<Entity> entities;
+
+	public EntityController(){
+		entities = new Array<Entity>();
+	}
 
 	@Override
 	public void update(float dt) {

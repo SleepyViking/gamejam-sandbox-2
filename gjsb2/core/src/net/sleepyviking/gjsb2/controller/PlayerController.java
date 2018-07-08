@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
+import net.sleepyviking.gjsb2.model.Entity;
 import net.sleepyviking.gjsb2.model.Player;
 
 public class PlayerController extends EntityController implements InputProcessor {
@@ -13,7 +15,7 @@ public class PlayerController extends EntityController implements InputProcessor
 	}
 
 	PlayerController(){
-
+		entities = new Array<Entity>();
 		Gdx.input.setInputProcessor(this);
 
 	}
@@ -25,6 +27,20 @@ public class PlayerController extends EntityController implements InputProcessor
 
 	@Override
 	public boolean keyDown(int keycode) {
+		switch(keycode){
+			case Input.Keys.W:
+				System.out.print("W");
+				break;
+			case Input.Keys.S:
+				System.out.print("S");
+				break;
+			case Input.Keys.D:
+				System.out.print("D");
+				break;
+			case Input.Keys.A:
+				System.out.print("A");
+				break;
+		}
 		return false;
 	}
 

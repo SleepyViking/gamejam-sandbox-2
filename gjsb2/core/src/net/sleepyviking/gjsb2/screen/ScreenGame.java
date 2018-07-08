@@ -1,9 +1,9 @@
 package net.sleepyviking.gjsb2.screen;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 
-import net.sleepyviking.gjsb2.Game;
 import net.sleepyviking.gjsb2.controller.WorldController;
 import net.sleepyviking.gjsb2.model.World;
 import net.sleepyviking.gjsb2.view.WorldRenderer;
