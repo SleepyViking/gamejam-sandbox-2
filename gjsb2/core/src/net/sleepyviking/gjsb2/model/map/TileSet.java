@@ -15,11 +15,6 @@ public class TileSet {
 	JsonValue jsonBase;
 	JsonValue tiles;
 	int dimx, dimy;
-	/**
-	 *	 TODO: This class will contain methods for loading tilesets from JSON (eg) that contain additional information such
-	 *	 as interactivity and allow this information to be divorced from the Map class.
-	 *
-	 *	 */
 	
 	public TileSet(String filename){
 		JsonValue tmp;
@@ -27,12 +22,8 @@ public class TileSet {
 		jsonBase = jsonReader.parse(new FileHandle(filename));
 		texture = new Texture(jsonBase.getString("texture"));
 		tiles = jsonBase.get("tiles");
-		
-		
-		
 		dimx = jsonBase.getInt("dimx");
 		dimy = jsonBase.getInt("dimy");
-		
 		tileSet = new Array<Tile>(tiles.size);
 		
 		for (int i = 0; i < tiles.size; i++){

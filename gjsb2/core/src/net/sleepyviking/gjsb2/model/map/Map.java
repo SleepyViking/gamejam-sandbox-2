@@ -15,8 +15,6 @@ public class Map {
 
 	private JsonReader json;
 	private JsonValue jsonBase;
-
-	//private Texture mapTextureSheet;
 	
 	private int mapDimX, mapDimY;
 	private int tileDimX, tileDimY;
@@ -25,11 +23,6 @@ public class Map {
 
 	private TileSet tileSet;
 	private String tileSetFile;
-	
-	//TODO: Make a JSON reader/writer for maps
-	//public Map(String jsonName){
-	//	json = new Json();
-	//}
 
 	public Map(FileHandle mapjson){
 		json = new JsonReader();
@@ -45,20 +38,12 @@ public class Map {
 		
 		tileDimX = tileSet.getDimx();
 		tileDimY = tileSet.getDimy();
-
-		//TODO: testing
+	
 		//randomize();
-		//inOrder();
 	}
 
 	public Tile getTileAt(int x, int y){
 		return tileSet.get(tiles[mapDimX*y + x]);
-	}
-
-	public void inOrder(){
-		for (int i = 0; i < tiles.length; i++) {
-			tiles[i] = i%tileSet.getSize();
-		}
 	}
 
 	public void randomize(){

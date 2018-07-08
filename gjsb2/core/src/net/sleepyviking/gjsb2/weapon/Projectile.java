@@ -4,6 +4,4 @@ import net.sleepyviking.gjsb2.model.Entity;
 
 public class Projectile extends Entity{
 
-
-
 }

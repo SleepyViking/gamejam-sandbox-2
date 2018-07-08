@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
 import net.sleepyviking.gjsb2.model.Entity;
+import net.sleepyviking.gjsb2.model.Player;
 import net.sleepyviking.gjsb2.model.World;
 import net.sleepyviking.gjsb2.model.map.Tile;
 
@@ -16,9 +17,9 @@ public class WorldRenderer {
     private SpriteBatch spriteBatch;
     private OrthographicCamera camera;
     private Vector2 viewPort;
-
+    
     private World world;
-
+    
     //initializes the objects needed
     public WorldRenderer(World world){
         this.world = world;
@@ -37,14 +38,15 @@ public class WorldRenderer {
 
         Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
         spriteBatch.setProjectionMatrix(camera.combined);
-        spriteBatch.begin(); {
+        
+        {spriteBatch.begin();
+        
             /*renderWhomever functions called here*/
             renderWorld();
             renderEntities();
             
-        } spriteBatch.end();
+        spriteBatch.end();}
 
     }
 
