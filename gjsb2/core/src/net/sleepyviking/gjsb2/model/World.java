@@ -1,6 +1,7 @@
 package net.sleepyviking.gjsb2.model;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import net.sleepyviking.gjsb2.model.map.Map;
@@ -9,6 +10,7 @@ public class World {
 
 	private final static Vector2 VIEWPORT = new Vector2(256, 192);
 	private OrthographicCamera camera;
+	
 
 	public Map map;
 

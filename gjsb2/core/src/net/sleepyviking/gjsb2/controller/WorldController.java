@@ -1,5 +1,6 @@
 package net.sleepyviking.gjsb2.controller;
 
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import net.sleepyviking.gjsb2.model.Entity;
@@ -16,13 +17,7 @@ public class WorldController extends Controller{
 
 	public WorldController(World world){
 		this.world = world;
-		this.world.map = new Map(
-						new Texture("tilesheet.png"),
-						64, //width in tiles
-						64, //height in tiles
-						16, //width of tiles in pixels
-						16	//height of tiles in pixels
-		);
+		this.world.map = new Map(new FileHandle("world1.json"));
 
 		Player player = new Player(new Vector2(64,64));
 

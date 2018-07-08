@@ -33,4 +33,14 @@ public class ScreenGame extends ScreenBase{
             worldRenderer.render();
         }
     }
+    
+    @Override
+    public void resize(int width, int height) {
+        worldRenderer.resize(width, height);
+    }
+    
+    @Override
+    public void dispose() {
+        worldRenderer.dispose();
+    }
 }

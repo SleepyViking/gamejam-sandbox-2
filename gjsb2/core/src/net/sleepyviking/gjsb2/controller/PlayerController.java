@@ -33,6 +33,9 @@ public class PlayerController extends EntityController implements InputProcessor
 			else if	(keycode == Input.Keys.S) player.setMoveY(-1f );
 			else if	(keycode == Input.Keys.A) player.setMoveX(-1f );
 			else if	(keycode == Input.Keys.D) player.setMoveX( 1f );
+			else if (keycode == Input.Keys.SPACE){
+			
+			}
 			return true;
 		}
 	}

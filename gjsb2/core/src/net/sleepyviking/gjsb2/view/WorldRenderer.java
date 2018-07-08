@@ -21,13 +21,15 @@ public class WorldRenderer {
 
     //initializes the objects needed
     public WorldRenderer(World world){
+        this.world = world;
+        create();
+    }
+    
+    public void create(){
         spriteBatch = new SpriteBatch();
-
         camera = world.getCamera();
         viewPort = new Vector2(world.getViewport());
         camera.setToOrtho(false, viewPort.x, viewPort.y);
-        this.world = world;
-
     }
 
     //does the rendering
@@ -37,13 +39,12 @@ public class WorldRenderer {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         spriteBatch.setProjectionMatrix(camera.combined);
-        spriteBatch.begin();
-        /*renderWhomever functions called here*/
-
-        renderWorld();
-        renderEntities();
-
-        spriteBatch.end();
+        spriteBatch.begin(); {
+            /*renderWhomever functions called here*/
+            renderWorld();
+            renderEntities();
+            
+        } spriteBatch.end();
 
     }
 
@@ -67,6 +68,15 @@ public class WorldRenderer {
         for (Entity e: world.entities) {
             spriteBatch.draw(e.textureRegion, e.getPos().x, e.getPos().y);
         }
+    }
+    
+    public void resize(int width, int height){
+        viewPort.set(width/2f, height/2f);
+        camera.setToOrtho(false, viewPort.x, viewPort.y);
+    }
+    
+    public void dispose(){
+        spriteBatch.dispose();
     }
 
 
