@@ -24,6 +24,7 @@ public class WorldController extends Controller{
 		setPlayerController(new PlayerController(player));
 		setEntityController(new EntityController());
 
+		world.setPlayer(player);
 		this.addEntity(player);
 	}
 

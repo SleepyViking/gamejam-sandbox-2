@@ -13,8 +13,8 @@ public class World {
 	
 
 	public Map map;
-
 	public Array<Entity> entities = new Array<Entity>();
+	private Player player;
 
 	public World(){
 		this.camera = new OrthographicCamera();
@@ -26,6 +26,14 @@ public class World {
 
 	public Vector2 getViewport(){
 		return VIEWPORT;
+	}
+
+	public void setPlayer(Player player){
+		this.player = player;
+	}
+
+	public Player getPlayer(){
+		return player;
 	}
 
 	public void addEntity(Entity e){

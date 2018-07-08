@@ -36,6 +36,9 @@ public class WorldRenderer {
     //does the rendering
     public void render(){
 
+        camera.position.set(world.getPlayer().getPos().x, world.getPlayer().getPos().y, 0);
+        camera.update();
+        
         Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         spriteBatch.setProjectionMatrix(camera.combined);
