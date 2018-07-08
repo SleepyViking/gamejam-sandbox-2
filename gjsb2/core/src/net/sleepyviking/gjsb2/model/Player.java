@@ -5,13 +5,29 @@ import net.sleepyviking.gjsb2.controller.PlayerController;
 
 public class Player extends Mob{
 
-	private Vector2 moveDir;
-
 	public Player(Vector2 pos){
 		super(pos);
+		this.moveSpeed = 15.75f;
+		this.moveDir = new Vector2(0, 0);
+		this.name = "Player";
 	}
 
+	public void setMoveDir(float x, float y) {
+		this.moveDir.set(x, y).nor();
+	}
 
+	public void setMoveY(float y) {
+		this.moveDir.y = y;
+		this.moveDir.nor();
+	}
 
+	public void setMoveX(float x) {
+		this.moveDir.x = x;
+		this.moveDir.nor();
+	}
+
+	public Vector2 getMoveDir() {
+		return moveDir;
+	}
 
 }

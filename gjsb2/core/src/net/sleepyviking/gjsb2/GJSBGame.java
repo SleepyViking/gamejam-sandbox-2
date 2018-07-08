@@ -8,6 +8,7 @@ public class GJSBGame extends Game {
 
 	@Override
 	public void create () {
+
 		setScreen(new ScreenGame(this));
 
 	}

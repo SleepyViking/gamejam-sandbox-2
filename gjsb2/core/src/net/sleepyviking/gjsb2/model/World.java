@@ -3,14 +3,18 @@ package net.sleepyviking.gjsb2.model;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import net.sleepyviking.gjsb2.model.map.Map;
 
 public class World {
 
-	private final static Vector2 VIEWPORT = new Vector2(10,10);
+	private final static Vector2 VIEWPORT = new Vector2(256, 192);
 	private OrthographicCamera camera;
 
-	public World(){
+	public Map map;
 
+	public Array<Entity> entities = new Array<Entity>();
+
+	public World(){
 		this.camera = new OrthographicCamera();
 	}
 
@@ -20,6 +24,11 @@ public class World {
 
 	public Vector2 getViewport(){
 		return VIEWPORT;
+	}
+
+	public void addEntity(Entity e){
+		this.entities.add(e);
+		System.out.println("Added " + e);
 	}
 
 

@@ -7,7 +7,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
+import net.sleepyviking.gjsb2.model.Entity;
 import net.sleepyviking.gjsb2.model.World;
+import net.sleepyviking.gjsb2.model.map.Tile;
 
 public class WorldRenderer {
 
@@ -23,12 +25,10 @@ public class WorldRenderer {
 
         camera = world.getCamera();
         viewPort = new Vector2(world.getViewport());
-        camera.setToOrtho(false, viewPort.x,viewPort.y);
-
-
+        camera.setToOrtho(false, viewPort.x, viewPort.y);
         this.world = world;
-    }
 
+    }
 
     //does the rendering
     public void render(){
@@ -38,11 +38,38 @@ public class WorldRenderer {
 
         spriteBatch.setProjectionMatrix(camera.combined);
         spriteBatch.begin();
-
         /*renderWhomever functions called here*/
+
+        renderWorld();
+        renderEntities();
 
         spriteBatch.end();
 
     }
+
+    public void renderWorld(){
+
+        spriteBatch.setColor(0.8f,0.7f,0.9f,1);
+
+        for (int y = 0; y < world.map.getDimy(); y++) {
+            for (int x = 0; x < world.map.getDimx(); x++) {
+                spriteBatch.draw(
+                        world.map.getTileAt(x, y).getTextureRegion(),
+                        x*world.map.getTilex(),
+                        y*world.map.getTiley());
+            }
+        }
+    }
+    public void renderEntities(){
+
+        spriteBatch.setColor(1f,1f,1f,1);
+
+        for (Entity e: world.entities) {
+            spriteBatch.draw(e.textureRegion, e.getPos().x, e.getPos().y);
+        }
+    }
+
+
+
 
 }

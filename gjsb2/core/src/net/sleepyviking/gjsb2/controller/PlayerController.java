@@ -10,43 +10,48 @@ import net.sleepyviking.gjsb2.model.Player;
 
 public class PlayerController extends EntityController implements InputProcessor {
 
+	Player player;
+
+
 	PlayerController(Player player){
-		this.addEntity(player);
-	}
-
-	PlayerController(){
-		entities = new Array<Entity>();
+		this.setPlayer(player);
 		Gdx.input.setInputProcessor(this);
-
 	}
 
 	@Override
 	public void update(float dt) {
-
+		player.getVel().set(player.getMoveDir().x*player.getMoveSpeed(), player.getMoveDir().y*player.getMoveSpeed());
+		//System.out.println(player.getMoveDir() +"     "+ player.getPos());
 	}
 
 	@Override
 	public boolean keyDown(int keycode) {
-		switch(keycode){
-			case Input.Keys.W:
-				System.out.print("W");
-				break;
-			case Input.Keys.S:
-				System.out.print("S");
-				break;
-			case Input.Keys.D:
-				System.out.print("D");
-				break;
-			case Input.Keys.A:
-				System.out.print("A");
-				break;
+		if(player == null) return false;
+
+		else{
+			if			(keycode == Input.Keys.W) player.setMoveY( 1f );
+			else if	(keycode == Input.Keys.S) player.setMoveY(-1f );
+			else if	(keycode == Input.Keys.A) player.setMoveX(-1f );
+			else if	(keycode == Input.Keys.D) player.setMoveX( 1f );
+			return true;
 		}
-		return false;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
 	}
 
 	@Override
 	public boolean keyUp(int keycode) {
-		return false;
+		if(player == null) return false;
+
+		else{
+			if			(keycode == Input.Keys.W) player.setMoveY( 0f );
+			else if	(keycode == Input.Keys.S) player.setMoveY( 0f );
+			else if	(keycode == Input.Keys.A) player.setMoveX( 0f );
+			else if	(keycode == Input.Keys.D) player.setMoveX( 0f );
+			return true;
+		}
 	}
 
 	@Override
@@ -78,4 +83,7 @@ public class PlayerController extends EntityController implements InputProcessor
 	public boolean scrolled(int amount) {
 		return false;
 	}
+
+
+
 }

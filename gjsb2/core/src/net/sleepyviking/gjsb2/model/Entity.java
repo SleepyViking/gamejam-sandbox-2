@@ -1,12 +1,23 @@
 package net.sleepyviking.gjsb2.model;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector;
 import com.badlogic.gdx.math.Vector2;
 import net.sleepyviking.gjsb2.controller.Controller;
 
 public class Entity extends Model{
+
+	String name;
+
+	int spriteSizeX = 8, spriteSizeY = 8;
+
 	Vector2 pos;
 	Vector2 vel;
+	public Texture texture = new Texture("spritesheet1.png");
+	public TextureRegion textureRegion = new TextureRegion(texture, 0, 0, spriteSizeX, spriteSizeY);
+	public Sprite sprite = new Sprite(texture);
 
 	public Entity(){
 		this.pos = new Vector2();
@@ -23,7 +34,7 @@ public class Entity extends Model{
 		this.pos = new Vector2();
 		this.vel = new Vector2();
 		setPos(pos);
-		setVel(pos);
+		setVel(vel);
 	}
 
 	public Vector2 getPos(){
@@ -42,4 +53,11 @@ public class Entity extends Model{
 		this.pos.set(pos);
 	}
 	//One day, I'll be moving around the game world
+
+
+	@Override
+	public String toString(){
+		return String.format("%18s \tx: %3.2f, y: %3.2f", name, pos.x, pos.y);
+	}
+
 }
