@@ -8,12 +8,15 @@ import net.sleepyviking.gjsb2.model.Player;
 import net.sleepyviking.gjsb2.model.World;
 import net.sleepyviking.gjsb2.model.map.Map;
 
+
+//Class that sorts out and tells everything to update
 public class WorldController extends Controller{
 
 	World world;
 
 	PlayerController playerController;
 	EntityController entityController;
+	CameraController cameraController;
 
 	public WorldController(World world){
 		this.world = world;
@@ -26,12 +29,15 @@ public class WorldController extends Controller{
 
 		world.setPlayer(player);
 		this.addEntity(player);
+
+		cameraController = new CameraController(world);
 	}
 
 	@Override
 	public void update(float dt) {
 		playerController.update(dt);
 		entityController.update(dt);
+		cameraController.update();
 	}
 
 	public PlayerController getPlayerController() {
