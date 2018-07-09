@@ -12,11 +12,11 @@ import net.sleepyviking.gjsb2.model.map.Map;
 //Class that sorts out and tells everything to update
 public class WorldController extends Controller{
 
-	World world;
+	private World world;
 
-	PlayerController playerController;
-	EntityController entityController;
-	CameraController cameraController;
+	private PlayerController playerController;
+	private EntityController entityController;
+	private CameraController cameraController;
 
 	public WorldController(World world){
 		this.world = world;
@@ -28,7 +28,7 @@ public class WorldController extends Controller{
 		setEntityController(new EntityController());
 
 		world.setPlayer(player);
-		this.addEntity(player);
+		addEntity(player);
 
 		cameraController = new CameraController(world);
 	}

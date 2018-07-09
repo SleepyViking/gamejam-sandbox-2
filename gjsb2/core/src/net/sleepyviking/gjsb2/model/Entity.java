@@ -3,11 +3,9 @@ package net.sleepyviking.gjsb2.model;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector;
 import com.badlogic.gdx.math.Vector2;
-import net.sleepyviking.gjsb2.controller.Controller;
 
-public class Entity extends Model{
+public class Entity{
 
 	String name;
 

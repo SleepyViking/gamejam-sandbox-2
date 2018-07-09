@@ -3,6 +3,7 @@ package net.sleepyviking.gjsb2.view;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -16,6 +17,8 @@ public class WorldRenderer {
 
     private SpriteBatch spriteBatch;
     private OrthographicCamera camera;
+    
+    
     private Vector2 viewPort;
     
     private World world;
@@ -73,7 +76,7 @@ public class WorldRenderer {
     }
     
     public void resize(int width, int height){
-        viewPort.set(width/2f, height/2f);
+        viewPort.set(width/3f, height/3f);
         camera.setToOrtho(false, viewPort.x, viewPort.y);
     }
     

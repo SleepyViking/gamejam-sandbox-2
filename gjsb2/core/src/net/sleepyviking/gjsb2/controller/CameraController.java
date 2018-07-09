@@ -1,6 +1,7 @@
 package net.sleepyviking.gjsb2.controller;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.Vector2;
 import net.sleepyviking.gjsb2.model.Player;
 import net.sleepyviking.gjsb2.model.World;
 
@@ -12,6 +13,8 @@ public class CameraController {
     private World world;
     private Player player;
 
+    private float followx = 21f, followy = 13f;
+    
     public CameraController(World world){
         camera = world.getCamera();
         this.world = world;
@@ -20,7 +23,23 @@ public class CameraController {
 
     //Currently only follows player
     public void update(){
-        camera.position.set(player.getPos().x, player.getPos().y,0);
+        
+        
+        
+        if(player.getPos().x > camera.position.x + followx){
+            camera.position.x = player.getPos().x - followx;
+        }
+        else if(player.getPos().x < camera.position.x - followx){
+            camera.position.x = player.getPos().x + followx;
+        }
+        if(player.getPos().y > camera.position.y + followy){
+            camera.position.y = player.getPos().y - followy;
+        }
+        else if(player.getPos().y < camera.position.y - followy){
+            camera.position.y = player.getPos().y + followy;
+        }
+        
+        
         camera.update();
     }
 
