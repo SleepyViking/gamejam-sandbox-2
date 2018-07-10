@@ -8,11 +8,13 @@ import net.sleepyviking.gjsb2.controller.PlayerController;
 
 public class Player extends Mob{
 
+
 	public Player(Entity entity, float moveSpeed, String name){
 		this.entity = entity;
 		this.entity.name = name;
 		this.moveSpeed = moveSpeed;
 		moveDir = new Vector2(0,0);
+
 	}
 
 	public void setMoveDir(float x, float y) {

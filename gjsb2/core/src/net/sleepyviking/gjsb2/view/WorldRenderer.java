@@ -65,8 +65,8 @@ public class WorldRenderer {
             for (int x = 0; x < world.map.getDimx(); x++) {
                 spriteBatch.draw(
                         world.map.getTileAt(x, y).getTextureRegion(),
-                        x*world.map.getTilex(),
-                        y*world.map.getTiley());
+                        x,
+                        y, 1 , 1);
             }
         }
     }
@@ -75,13 +75,15 @@ public class WorldRenderer {
         spriteBatch.setColor(1f,1f,1f,1);
 
         for (Entity e: world.entities) {
-            spriteBatch.draw(e.textureRegion, e.getPos().x, e.getPos().y);
+            spriteBatch.draw(e.textureRegion, e.getPos().x, e.getPos().y, e.getSize().x, e.getSize().y);
         }
     }
     
     public void resize(int width, int height){
-        viewPort.set(width/scaleFactor, height/scaleFactor);
-        camera.setToOrtho(false, viewPort.x, viewPort.y);
+
+        //viewPort.set(width/3f, height/3f);
+        //camera.setToOrtho(false, viewPort.x, viewPort.y);
+
     }
     
     public void dispose(){

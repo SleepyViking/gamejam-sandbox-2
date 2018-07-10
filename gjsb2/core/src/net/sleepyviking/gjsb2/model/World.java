@@ -8,7 +8,7 @@ import net.sleepyviking.gjsb2.model.map.Map;
 
 public class World {
 
-	private final static Vector2 VIEWPORT = new Vector2(256, 192);
+	private final static Vector2 VIEWPORT = new Vector2(20, 12);
 	private OrthographicCamera camera;
 	
 

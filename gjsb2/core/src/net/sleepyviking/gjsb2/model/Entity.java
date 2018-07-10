@@ -20,6 +20,7 @@ public class Entity{
 	private Texture texture;
 	public TextureRegion textureRegion;
 
+
 	public Entity(){
 
 	}
@@ -56,6 +57,10 @@ public class Entity{
 		return vel;
 	}
 
+	public Vector2 getSize(){
+		return size;
+	}
+
 	public void setVel(Vector2 vel) {
 		this.vel.set(vel);
 	}
@@ -64,6 +69,9 @@ public class Entity{
 		this.pos.set(pos);
 	}
 	//One day, I'll be moving around the game world
+	public void setSize(Vector2 size){
+		this.size = size;
+	}
 
 	public void loadBase(FileHandle playerJson){
 		JsonReader jsonReader = new JsonReader();
