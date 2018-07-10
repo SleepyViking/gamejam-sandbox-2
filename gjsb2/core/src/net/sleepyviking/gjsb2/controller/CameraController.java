@@ -39,7 +39,6 @@ public class CameraController {
             camera.position.y = player.getPos().y + followy;
         }
         
-        
         camera.update();
     }
 

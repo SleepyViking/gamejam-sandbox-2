@@ -5,26 +5,24 @@ import com.badlogic.gdx.utils.Array;
 import net.sleepyviking.gjsb2.model.Entity;
 import net.sleepyviking.gjsb2.model.Mob;
 
-public class MobController extends EntityController{
+public class MobController{
 
     Array<Mob> mobs;
     Mob temp;
-    
+
     public MobController(){
-    
+        mobs = new Array<Mob>();
     }
-    
-    @Override
+
+
     public void update(float dt) {
-    
-    
-    
+
     }
-    
+
     public void addMob(Mob m){
         mobs.add(m);
     }
-    
-    
+
+
     
 }

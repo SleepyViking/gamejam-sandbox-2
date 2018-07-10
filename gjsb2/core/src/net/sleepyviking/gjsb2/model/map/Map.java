@@ -6,8 +6,11 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
+import net.sleepyviking.gjsb2.model.Entity;
+import net.sleepyviking.gjsb2.model.Player;
 
 import javax.xml.soap.Text;
+import java.io.File;
 
 public class Map {
 	//To contain the grid of tiles that make up the ground layer of the game
@@ -15,6 +18,9 @@ public class Map {
 
 	private JsonReader json;
 	private JsonValue jsonBase;
+	private FileHandle mapjson;
+
+	Player player;
 	
 	private int mapDimX, mapDimY;
 	private int tileDimX, tileDimY;
@@ -25,8 +31,11 @@ public class Map {
 	private String tileSetFile;
 
 	public Map(FileHandle mapjson){
+		this.mapjson = mapjson;
+
 		json = new JsonReader();
 		jsonBase = json.parse(mapjson);
+
 		
 		mapDimX = jsonBase.getInt("sizex");
 		mapDimY = jsonBase.getInt("sizey");
@@ -74,5 +83,17 @@ public class Map {
 	}
 	public int getTilex() {
 		return tileDimX;
+	}
+
+	public FileHandle getMapjson(){
+		return mapjson;
+	}
+
+	public void setPlayer(Player player){
+		this.player = player;
+	}
+
+	public Player getPlayer() {
+		return player;
 	}
 }

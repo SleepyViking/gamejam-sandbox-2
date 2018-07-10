@@ -3,9 +3,6 @@ package net.sleepyviking.gjsb2.controller;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Array;
-import net.sleepyviking.gjsb2.model.Entity;
 import net.sleepyviking.gjsb2.model.Player;
 
 public class PlayerController extends EntityController implements InputProcessor {
@@ -21,7 +18,7 @@ public class PlayerController extends EntityController implements InputProcessor
 	@Override
 	public void update(float dt) {
 		player.getVel().set(player.getMoveDir().x*player.getMoveSpeed(), player.getMoveDir().y*player.getMoveSpeed());
-		//System.out.println(player.getMoveDir() +"     "+ player.getPos());
+		System.out.println(player.getMoveDir() +"     "+ player.getVel());
 	}
 
 	@Override

@@ -20,8 +20,12 @@ public class WorldRenderer {
     
     
     private Vector2 viewPort;
+
+    private float scaleFactor = 2f;
     
     private World world;
+
+
     
     //initializes the objects needed
     public WorldRenderer(World world){
@@ -76,15 +80,12 @@ public class WorldRenderer {
     }
     
     public void resize(int width, int height){
-        viewPort.set(width/3f, height/3f);
+        viewPort.set(width/scaleFactor, height/scaleFactor);
         camera.setToOrtho(false, viewPort.x, viewPort.y);
     }
     
     public void dispose(){
         spriteBatch.dispose();
     }
-
-
-
 
 }
