@@ -13,7 +13,7 @@ public class CameraController {
     private World world;
     private Player player;
 
-    private float followx = 21f, followy = 13f;
+    private float followx = 0f, followy = 0f;
     
     public CameraController(World world){
         camera = world.getCamera();

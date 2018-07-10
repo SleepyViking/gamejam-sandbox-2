@@ -13,6 +13,7 @@ public class Entity{
 
 	Vector2 pos;
 	Vector2 vel;
+	Vector2 size;
 	public Texture texture = new Texture("spritesheet1.png");
 	public TextureRegion textureRegion = new TextureRegion(texture, 0, 0, spriteSizeX, spriteSizeY);
 	public Sprite sprite = new Sprite(texture);
@@ -43,6 +44,10 @@ public class Entity{
 		return vel;
 	}
 
+	public Vector2 getSize(){
+		return size;
+	}
+
 	public void setVel(Vector2 vel) {
 		this.vel.set(vel);
 	}
@@ -51,6 +56,9 @@ public class Entity{
 		this.pos.set(pos);
 	}
 	//One day, I'll be moving around the game world
+	public void setSize(Vector2 size){
+		this.size = size;
+	}
 
 
 	@Override

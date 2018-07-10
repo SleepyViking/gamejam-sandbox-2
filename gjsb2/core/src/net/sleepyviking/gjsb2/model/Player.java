@@ -9,6 +9,7 @@ public class Player extends Mob{
 		super(pos);
 		this.moveSpeed = 25.0f;
 		this.moveDir = new Vector2(0, 0);
+		this.size = new Vector2(1, 1);
 		this.name = "Player";
 	}
 
