@@ -16,6 +16,7 @@ public class Entity{
 
 	Vector2 pos = new Vector2();
 	Vector2 vel = new Vector2();
+	Vector2 size = new Vector2(1, 1);
 
 	private Texture texture;
 	public TextureRegion textureRegion;
@@ -25,11 +26,19 @@ public class Entity{
 
 	}
 
-	public Entity(String name, Texture texture, Vector2 pos, Vector2 vel, int spriteDimX, int spriteDimY){
+	public Entity(String name,
+								Texture texture,
+								Vector2 pos,
+								Vector2 vel,
+								int spriteDimX,
+								int spriteDimY,
+								Vector2 size)
+	{
 		this.name = name;
 		this.texture = texture;
 		this.setPos(pos);
 		this.setVel(vel);
+		this.size = size;
 		this.spriteDimX = spriteDimX;
 		this.spriteDimY = spriteDimY;
 		this.textureRegion = new TextureRegion(texture, 0, 0, spriteDimX, spriteDimY);

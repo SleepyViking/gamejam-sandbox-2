@@ -71,10 +71,13 @@
   ],
 
   "entities":[
-    {"base":"player.json",
-    "x":5.0, "y":5.0,
-    "vx":1.0, "vy":1.0,
-    "moveSpeed":15.0,
+    {
+      "base":"player.json",
+      "x":5.0, "y":5.0,
+      "vx":1.0, "vy":1.0,
+      "sizex":1.0,
+      "sizey":5.0,
+      "moveSpeed":15.0,
       "name":"Player",
       "isMob":true
     }

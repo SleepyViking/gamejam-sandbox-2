@@ -20,8 +20,6 @@ public class WorldRenderer {
     
     
     private Vector2 viewPort;
-
-    private float scaleFactor = 2f;
     
     private World world;
 
@@ -75,7 +73,11 @@ public class WorldRenderer {
         spriteBatch.setColor(1f,1f,1f,1);
 
         for (Entity e: world.entities) {
-            spriteBatch.draw(e.textureRegion, e.getPos().x, e.getPos().y, e.getSize().x, e.getSize().y);
+            spriteBatch.draw(e.textureRegion,
+                    e.getPos().x-e.getSize().x/2f,
+                    e.getPos().y-e.getSize().y/2f,
+                    e.getSize().x,
+                    e.getSize().y);
         }
     }
     

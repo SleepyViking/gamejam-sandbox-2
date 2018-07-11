@@ -40,6 +40,7 @@ public class EntityController extends Controller {
 
 		float x, y;
 		float vx, vy;
+		float sizex, sizey;
 		float moveSpeed = 0.0f;
 		boolean isMob;
 		String name;
@@ -66,14 +67,16 @@ public class EntityController extends Controller {
 			vx = entities.get(i).getFloat("vx");
 			y = entities.get(i).getFloat("y");
 			vy = entities.get(i).getFloat("vy");
-
+			sizex = entities.get(i).getFloat("sizex");
+			sizey = entities.get(i).getFloat("sizey");
 			Entity e = new Entity(
 							name,
 							texture,
 							new Vector2(x, y),
 							new Vector2(vx, vy),
 							spriteDimX,
-							spriteDimY
+							spriteDimY,
+							new Vector2(sizex, sizey)
 			);
 
 
