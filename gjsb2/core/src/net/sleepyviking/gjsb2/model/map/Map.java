@@ -23,9 +23,13 @@ public class Map {
 	Player player;
 	
 	private int mapDimX, mapDimY;
+	
+	
+	
+	private int numLayers;
 	private int tileDimX, tileDimY;
 
-	private int[] tiles;
+	private int[][] tiles; //tiles[0] = a 1dim array of all the tiles on the 0th layer.
 
 	private TileSet tileSet;
 	private String tileSetFile;
@@ -40,8 +44,15 @@ public class Map {
 		mapDimX = jsonBase.getInt("sizex");
 		mapDimY = jsonBase.getInt("sizey");
 		
-		tiles = new int[jsonBase.get("tiles").size];
-		tiles = jsonBase.get("tiles").asIntArray();
+		numLayers = jsonBase.get("tiles").size;
+		
+		tiles = new int[numLayers][];
+		
+		for (int i = 0; i < numLayers; i++){
+			tiles[i] = new int[jsonBase.get("tiles").get(i).size];
+			tiles[i] = jsonBase.get("tiles").get(i).asIntArray();
+		}
+		
 		tileSetFile = jsonBase.getString("tileset");
 		tileSet = new TileSet(tileSetFile);
 		
@@ -51,21 +62,25 @@ public class Map {
 		//randomize();
 	}
 
-	public Tile getTileAt(int x, int y){
-		return tileSet.get(tiles[mapDimX*y + x]);
+	public Tile getTileAt(int x, int y, int z){
+		return tileSet.get(tiles[z][mapDimX*y + x]);
 	}
 
 	public void randomize(){
 		for (int i = 0; i < tiles.length; i++) {
-			tiles[i] = (int)(Math.random()*tileSet.getSize());
+			for (int j = 0; j < tiles[i].length; i++) {
+				tiles[i][j] = (int)(Math.random()*tileSet.getSize());
+			}
 		}
 	}
 
 	public boolean checkIntegrity(){
 		if(tileSet != null &&  tiles.length > 0){
 			for (int i = 0; i < tiles.length; i++) {
-				if(tiles[i] < 0 || tiles[i] >= tileSet.getSize()){
-					return false;
+				for (int j = 0; j < tiles[i].length; j++) {
+					if(tiles[i][j] < 0 || tiles[i][j] >= tileSet.getSize()){
+						return false;
+					}
 				}
 			}
 			return true;
@@ -95,5 +110,9 @@ public class Map {
 
 	public Player getPlayer() {
 		return player;
+	}
+	
+	public int getNumLayers(){
+		return numLayers;
 	}
 }

@@ -61,10 +61,12 @@ public class WorldRenderer {
 
         for (int y = 0; y < world.map.getDimy(); y++) {
             for (int x = 0; x < world.map.getDimx(); x++) {
+                for (int z = 0; z < world.map.getNumLayers(); z++) {
                 spriteBatch.draw(
-                        world.map.getTileAt(x, y).getTextureRegion(),
+                        world.map.getTileAt(x, y, z).getTextureRegion(),
                         x,
                         y, 1 , 1);
+                }
             }
         }
     }
