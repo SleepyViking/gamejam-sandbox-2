@@ -15,9 +15,9 @@ public class CameraController {
     private World world;
     private Player player;
     
-    private Vector3 offset = new Vector3(0f, -4f, 11f);
+    private Vector3 offset = new Vector3(0f, -2f, 11f);
 
-    private float followx = 0.12f, followy = 0.2f;
+    private float followx = 0.2f, followy = 0.2f;
     
     public CameraController(World world){
         camera = world.getCamera();

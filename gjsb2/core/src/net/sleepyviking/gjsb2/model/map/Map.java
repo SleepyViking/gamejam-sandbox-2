@@ -2,10 +2,7 @@ package net.sleepyviking.gjsb2.model.map;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.Json;
-import com.badlogic.gdx.utils.JsonReader;
-import com.badlogic.gdx.utils.JsonValue;
+import com.badlogic.gdx.utils.*;
 import net.sleepyviking.gjsb2.model.Entity;
 import net.sleepyviking.gjsb2.model.Player;
 
@@ -13,8 +10,6 @@ import javax.xml.soap.Text;
 import java.io.File;
 
 public class Map {
-	//To contain the grid of tiles that make up the ground layer of the game
-	//each tile represented by an index which maps to the tileSet array.
 
 	private JsonReader json;
 	private JsonValue jsonBase;
@@ -23,8 +18,6 @@ public class Map {
 	Player player;
 	
 	private int mapDimX, mapDimY;
-	
-	
 	
 	private int numLayers;
 	private int tileDimX, tileDimY;
@@ -73,6 +66,18 @@ public class Map {
 			}
 		}
 	}
+	
+	public int[] randomizeLayer(int dimx, int dimy, int tileSetMin, int tileSetMax){
+		int range = tileSetMax-tileSetMin;
+		int[] out = new int[dimx*dimy];
+		
+		for (int y = 0; y < dimy; y++) {
+			for (int x = 0; x < dimx; x++) {
+				out[y*dimy + x] = (int)(Math.random()*range) + tileSetMin;
+			}
+		}
+		return out;
+	}
 
 	public boolean checkIntegrity(){
 		if(tileSet != null &&  tiles.length > 0){
@@ -115,4 +120,14 @@ public class Map {
 	public int getNumLayers(){
 		return numLayers;
 	}
+	
+	public void save(){
+		json = new JsonReader();
+		//JsonWriter jsonWriter = new JsonWriter();
+		
+		
+		
+		
+	}
+	
 }
