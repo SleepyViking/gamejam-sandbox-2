@@ -26,7 +26,7 @@ public class Entity{
 
 	}
 
-	public Entity(String name,
+	public Entity(				String name,
 								Texture texture,
 								Vector2 pos,
 								Vector2 vel,

@@ -1,5 +1,22 @@
 {
   "spritesheet":"playersheet.png",
-  "spriteDimX":"16",
-  "spriteDimY":"16"
+  "spriteDimX":16,
+  "spriteDimY":16,
+
+  "name":"Player",
+  "x":0.0, "y":0.0,
+  "vx":0.0, "vy":0.0,
+  "sizex":1.0, "sizey":1.0,
+  "isMob":true,
+  "moveSpeed":3.0,
+  "sprintMultiplier":1.75,
+  "jumpHeight":1.0,
+  "health":100,
+  "level":1,
+  "STR":1,
+  "CON":1,
+  "DEX":1,
+  "WIS":1,
+  "INT":1,
+  "CHA":1
 }

@@ -1,0 +1,22 @@
+{
+  "spritesheet":"skeletonsheet.png",
+  "spriteDimX":"16",
+  "spriteDimY":"16",
+
+  "name":"Skeleton",
+  "x":0.0, "y":0.0,
+  "vx":0.0, "vy":0.0,
+  "sizex":1.0, "sizey":1.0,
+  "isMob":true,
+  "moveSpeed":2.3,
+  "sprintMultiplier":1.6,
+  "jumpHeight":0.3,
+  "health":10,
+  "level":1,
+  "STR":-2,
+  "CON":0,
+  "DEX":2,
+  "WIS":-4,
+  "INT":-4,
+  "CHA":-4
+}

@@ -7,35 +7,24 @@ import com.badlogic.gdx.utils.JsonValue;
 import net.sleepyviking.gjsb2.controller.PlayerController;
 
 public class Player extends Mob{
+	
+	public Player(Mob mob){
 
-
-	public Player(Entity entity, float moveSpeed, String name){
-		this.entity = entity;
-		this.entity.name = name;
-		this.moveSpeed = moveSpeed;
-		moveDir = new Vector2(0,0);
-
+		this.entity           = mob.entity;               
+		this.moveSpeed        = mob.moveSpeed;       
+		this.sprintMultiplier = mob.sprintMultiplier;
+		this.jumpHeight       = mob.jumpHeight;      
+		this.health           = mob.health;          
+		this.level            = mob.level;           
+		this.STR              = mob.STR;             
+		this.CON              = mob.CON;             
+		this.DEX              = mob.DEX;             
+		this.WIS              = mob.WIS;             
+		this.INT              = mob.INT;             
+		this.CHA              = mob.CHA;
+		
+		this.moveDir 			= new Vector2(0,0);
+		
 	}
-
-	public void setMoveDir(float x, float y) {
-		this.moveDir.set(x, y).nor();
-	}
-
-	public void setMoveY(float y) {
-		this.moveDir.y = y;
-		this.moveDir.nor();
-	}
-
-	public void setMoveX(float x) {
-		this.moveDir.x = x;
-		this.moveDir.nor();
-	}
-
-	public Vector2 getMoveDir() {
-		return moveDir;
-	}
-
-	public Vector2 getVel(){return entity.vel;}
-	public Vector2 getPos(){return entity.pos;}
 
 }

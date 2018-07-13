@@ -139,16 +139,26 @@
 
   "entities":[
     {
-      "base":"player.json",
-      "x":5.0, "y":5.0,
-      "vx":1.0, "vy":1.0,
-      "sizex":1.0,
-      "sizey":1.0,
-      "moveSpeed":5.0,
       "name":"Player",
+      "base":"player.json",
+
+      "x":5.0, "y":5.0,
+      "vx":0.0, "vy":0.0,
+      "sizex":1.0, "sizey":1.0,
+
+      "moveSpeed":3.0,
+      "sprintMultiplier":1.75,
+      "jumpHeight":1.0,
+
       "isMob":true
     }
   ],
 
-  "playerIndex":0
+  "playerIndex":0,
+
+  "sound":{
+    "music":[],
+    "atmosphere":[]
+  }
+
 }

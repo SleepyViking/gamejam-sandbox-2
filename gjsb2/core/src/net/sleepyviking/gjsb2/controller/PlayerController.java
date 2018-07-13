@@ -12,18 +12,25 @@ public class PlayerController extends EntityController implements InputProcessor
 	boolean wdown = false,
 			adown = false,
 			sdown = false,
-			ddown = false;
+			ddown = false,
+			sprinting = false;
 	
+	float moveSpeed;
+	float sprintMultiplier;
 	
 	PlayerController(Player player){
 		this.setPlayer(player);
+		this.moveSpeed = player.getMoveSpeed();
+		this.sprintMultiplier = player.getSprintMultiplier();
+		
+		
 		Gdx.input.setInputProcessor(this);
 	}
 
 	@Override
 	public void update(float dt) {
-		player.getVel().set(player.getMoveDir().x*player.getMoveSpeed(), player.getMoveDir().y*player.getMoveSpeed());
-		System.out.println(player.getMoveDir() +"     "+ player.getVel());
+		if (sprinting) player.getVel().set(player.getMoveDir().x, player.getMoveDir().y).scl(player.getMoveSpeed() * sprintMultiplier);
+		else player.getVel().set(player.getMoveDir().x, player.getMoveDir().y).scl(player.getMoveSpeed());
 	}
 
 	@Override
@@ -38,6 +45,10 @@ public class PlayerController extends EntityController implements InputProcessor
 			else if (keycode == Input.Keys.SPACE){
 			
 			}
+			else if(keycode == Input.Keys.SHIFT_LEFT){
+				sprinting = true;
+			}
+			
 			return true;
 		}
 	}
@@ -71,6 +82,9 @@ public class PlayerController extends EntityController implements InputProcessor
 				if (adown){player.setMoveX( -1f );}
 				else {player.setMoveX( 0f );}
 					ddown = false;
+			}
+			else if(keycode == Input.Keys.SHIFT_LEFT){
+				sprinting = false;
 			}
 			return true;
 		}
