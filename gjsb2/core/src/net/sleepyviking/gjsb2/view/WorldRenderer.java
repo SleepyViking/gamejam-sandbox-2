@@ -17,13 +17,8 @@ public class WorldRenderer {
 
     private SpriteBatch spriteBatch;
     private PerspectiveCamera camera;
-    
-    
     private Vector2 viewPort;
-    
     private World world;
-
-
     
     //initializes the objects needed
     public WorldRenderer(World world){
@@ -70,7 +65,15 @@ public class WorldRenderer {
                 spriteBatch.draw(
                         world.map.getTileAt(x, y, z).getTextureRegion(),
                         x,
-                        -y, 1 , 1);
+                        world.map.getDimy()-y, 1 , 1);
+                
+                    /*
+                     *  TODO: revert when we get map editing working;
+                     *  as it is, (x, y, 1, 1) renders the map in the json file upside-down.
+                     *  (x, dimy-y, 1, 1) gives a right-side up map and positive values, but
+                     *  this is unnecessary if we make a tool that writes the lines of the json in reverse order.
+                     */
+                
                 }
             }
         }
