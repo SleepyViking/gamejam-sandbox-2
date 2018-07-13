@@ -1,5 +1,5 @@
 {
-  "spritesheet":"spritesheet1.png",
-  "spriteDimX":"8",
-  "spriteDimY":"8"
+  "spritesheet":"playersheet.png",
+  "spriteDimX":"16",
+  "spriteDimY":"16"
 }

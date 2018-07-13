@@ -16,7 +16,7 @@ import net.sleepyviking.gjsb2.model.map.Tile;
 public class WorldRenderer {
 
     private SpriteBatch spriteBatch;
-    private OrthographicCamera camera;
+    private PerspectiveCamera camera;
     
     
     private Vector2 viewPort;
@@ -35,14 +35,19 @@ public class WorldRenderer {
         spriteBatch = new SpriteBatch();
         camera = world.getCamera();
         viewPort = new Vector2(world.getViewport());
-        camera.setToOrtho(false, viewPort.x, viewPort.y);
+        //camera.setToOrtho(false, viewPort.x, viewPort.y);
+        camera.position.set(10f, 10f, 3f);
+        camera.near = 1f;
+        camera.far = 300f;
+        camera.update();
     }
 
     //does the rendering
     public void render(){
-
         Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        
+        
         spriteBatch.setProjectionMatrix(camera.combined);
         
         {spriteBatch.begin();
@@ -65,7 +70,7 @@ public class WorldRenderer {
                 spriteBatch.draw(
                         world.map.getTileAt(x, y, z).getTextureRegion(),
                         x,
-                        y, 1 , 1);
+                        -y, 1 , 1);
                 }
             }
         }

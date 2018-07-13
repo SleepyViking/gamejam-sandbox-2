@@ -9,7 +9,12 @@ public class PlayerController extends EntityController implements InputProcessor
 
 	Player player;
 
-
+	boolean wdown = false,
+			adown = false,
+			sdown = false,
+			ddown = false;
+	
+	
 	PlayerController(Player player){
 		this.setPlayer(player);
 		Gdx.input.setInputProcessor(this);
@@ -26,10 +31,10 @@ public class PlayerController extends EntityController implements InputProcessor
 		if(player == null) return false;
 
 		else{
-			if			(keycode == Input.Keys.W) player.setMoveY( 1f );
-			else if	(keycode == Input.Keys.S) player.setMoveY(-1f );
-			else if	(keycode == Input.Keys.A) player.setMoveX(-1f );
-			else if	(keycode == Input.Keys.D) player.setMoveX( 1f );
+			if		(keycode == Input.Keys.W) {player.setMoveY( 1f ); wdown = true;}
+			else if	(keycode == Input.Keys.S) {player.setMoveY(-1f ); sdown = true;}
+			else if	(keycode == Input.Keys.A) {player.setMoveX(-1f ); adown = true;}
+			else if	(keycode == Input.Keys.D) {player.setMoveX( 1f ); ddown = true;}
 			else if (keycode == Input.Keys.SPACE){
 			
 			}
@@ -46,10 +51,27 @@ public class PlayerController extends EntityController implements InputProcessor
 		if(player == null) return false;
 
 		else{
-			if			(keycode == Input.Keys.W) player.setMoveY( 0f );
-			else if	(keycode == Input.Keys.S) player.setMoveY( 0f );
-			else if	(keycode == Input.Keys.A) player.setMoveX( 0f );
-			else if	(keycode == Input.Keys.D) player.setMoveX( 0f );
+			
+			if		(keycode == Input.Keys.W){
+				if (sdown){player.setMoveY( -1f );}
+				else {player.setMoveY( 0f ); }
+				wdown = false;
+			}
+			else if	(keycode == Input.Keys.S) {
+				if (wdown){player.setMoveY( 1f );}
+				else {player.setMoveY( 0f ); }
+				sdown = false;
+			}
+			else if	(keycode == Input.Keys.A) {
+				if (ddown){player.setMoveX( 1f );}
+				else {player.setMoveX( 0f ); }
+				adown = false;
+			}
+			else if	(keycode == Input.Keys.D) {
+				if (adown){player.setMoveX( -1f );}
+				else {player.setMoveX( 0f );}
+					ddown = false;
+			}
 			return true;
 		}
 	}
