@@ -142,7 +142,7 @@
       "name":"Player",
       "base":"player.json",
 
-      "x":5.0, "y":5.0,
+      "x":0.0, "y":0.0,
       "vx":0.0, "vy":0.0,
       "sizex":1.0, "sizey":1.0,
 

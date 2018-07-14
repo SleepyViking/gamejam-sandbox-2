@@ -19,6 +19,7 @@ public class Entity{
 	Vector2 size = new Vector2(1, 1);
 
 	private Texture texture;
+	
 	public TextureRegion textureRegion;
 
 

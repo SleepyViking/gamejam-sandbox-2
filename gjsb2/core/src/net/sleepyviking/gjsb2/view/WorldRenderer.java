@@ -85,7 +85,7 @@ public class WorldRenderer {
         for (Entity e: world.entities) {
             spriteBatch.draw(e.textureRegion,
                     e.getPos().x-e.getSize().x/2f,
-                    e.getPos().y-e.getSize().y/2f,
+                    e.getPos().y+e.getSize().y,
                     e.getSize().x,
                     e.getSize().y);
         }

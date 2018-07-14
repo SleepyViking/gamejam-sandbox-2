@@ -101,7 +101,7 @@ public class EntityController extends Controller {
 					new Vector2(sizex, sizey)
 			);
 			
-			isMob = entityStateJson.getBoolean("isMob");
+			isMob = loadBoolean("isMob", hierarchy);
 			if(isMob){
 				moveSpeed = 		loadFloat	("moveSpeed"		, hierarchy);
 				sprintMultiplier = 	loadFloat	("sprintMultiplier"	, hierarchy);
