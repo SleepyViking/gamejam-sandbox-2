@@ -3,6 +3,7 @@ package net.sleepyviking.gjsb2.controller;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
 import net.sleepyviking.gjsb2.model.Mob;
@@ -13,7 +14,7 @@ public class PlayerController implements InputProcessor {
 	private CameraController cameraController;
 	private EntityController entityController;
 	private Player player;
-	private Ray ray;
+	private Ray ray = new Ray();
 
 	boolean wdown = false,
 			adown = false,
@@ -139,6 +140,9 @@ public class PlayerController implements InputProcessor {
 
 	@Override
 	public boolean mouseMoved(int screenX, int screenY) {
+		
+		
+		
 		return false;
 	}
 

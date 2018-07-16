@@ -30,19 +30,27 @@ public class EntityController extends Controller {
 		Entity e;
 		for (int i = 0; i < entities.size; i++) {
 			e = entities.get(i);
-			e.getPos().add(e.getVel().scl(dt));
 			
-			if((e.getPos().z > 0f) || !world.map.tileSolid(e.getPos())){
+			e.getPos().add(
+					e.getVel().x*dt,
+					e.getVel().y*dt,
+					e.getVel().z*dt
+			);
+			
+			if(!world.map.tileSolid(e.getPos()) || (e.getPos().z > 0f)){
 				e.setAirborne(true);
-			} else if(world.map.tileSolid(e.getPos()) && (e.getPos().z == 0 || (e.getPos().z + e.getVel().z*dt < 0 && e.getPos().z > 0))){
+			} else if(world.map.tileSolid(e.getPos()) && (e.getPos().z == 0 || (e.getPos().z + e.getVel().z*dt <= 0))){
 				e.setAirborne(false);
 			}
 			
 			if(e.isAirborne()){
 				e.getVel().z += Constants.gravity*dt;	//Todo: Make this a variable per map instead of a constant
 			} else {
-				e.getVel().z = 0;
+				if (e.getPos().z < 0) e.getPos().z = 0;
+				e.getVel().setZero();
 			}
+			
+
 		}
 	}
 

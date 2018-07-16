@@ -72,6 +72,8 @@ public class WorldRenderer {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
         
             for(Mob m : world.mobs){
+                
+                if (m.drawing){
                 shapeRenderer.setColor(Color.GREEN);
                 shapeRenderer.line(m.getPos().x,
                                    m.getPos().y,
@@ -80,6 +82,7 @@ public class WorldRenderer {
                                    m.getPos().y + m.getVel().y*1.0f,
                                    m.getPos().z+1.0f + m.getVel().z*1.0f
                                    );
+                }
     
                 shapeRenderer.setColor(Color.RED);
                 shapeRenderer.line(m.getPos().x,

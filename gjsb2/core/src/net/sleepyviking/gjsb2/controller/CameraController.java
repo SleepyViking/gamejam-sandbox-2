@@ -45,6 +45,8 @@ public class CameraController {
         camera.lookAt(player.getPos().x ,player.getPos().y, 0);
         camera.update();
     }
-
-
+    
+    public PerspectiveCamera getCamera(){
+        return camera;
+    }
 }

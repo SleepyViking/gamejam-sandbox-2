@@ -8,12 +8,10 @@ import net.sleepyviking.gjsb2.model.Mob;
 public class MobController{
     
     
-    private float sumdtDraw;
-    private float sumdtJump;
-    private float sumdtSprint;
+
     
     Array<Mob> mobs;
-    Vector3 aimDir;
+    
 
     public MobController(){
         mobs = new Array<Mob>();
@@ -22,54 +20,60 @@ public class MobController{
 
     public void update(float dt) {
         for (Mob m: mobs){
-            if(!m.getEntity().isAirborne()){
-                if (m.sprinting) {
-                    sumdtSprint += dt;
-                    m.getVel().set(
-                            m.getMoveDir().x*m.getMoveSpeed()*m.getSprintMultiplier(),
-                            m.getMoveDir().y*m.getMoveSpeed()*m.getSprintMultiplier(),
-                            m.getVel().z); }
-                else{ m.getVel().set(
-                        m.getMoveDir().x*m.getMoveSpeed(),
-                        m.getMoveDir().y*m.getMoveSpeed(),
-                        m.getVel().z);}
-            } else {
-                m.getVel().x += m.getMoveDir().x*m.getMoveSpeed();
-                m.getVel().y += m.getMoveDir().y*m.getMoveSpeed();
-            }
-            
             if(m.drawing){
-                sumdtDraw += dt;
-                m.drawStrength = m.drawStrengthMax - 1f/(sumdtDraw);
-                if(m.drawStrength < 0) m.drawStrength = 0f;
+                m.sumdtDraw += dt;
+                m.drawStrength = m.drawStrengthMax - 1f/(m.sumdtDraw);
+                if(m.drawStrength < 0) m.drawStrength = m.drawStrengthMax*0.725f; //before charging cure
                 System.out.println(m.drawStrength + " / " + m.drawStrengthMax);
             }
     
             if(m.chargingJump){
-                sumdtJump += dt;
-                m.jumpStrength = m.jumpStrengthMax - 1f/(sumdtJump);
-                if(m.jumpStrength < 0) m.jumpStrength = 0f;
+                m.sumdtJump += dt;
+                m.jumpStrength = m.jumpStrengthMax - 1f/(m.sumdtJump);
+                if(m.jumpStrength < 0) m.jumpStrength =  m.drawStrengthMax*0.725f;
                 System.out.println(m.jumpStrength + " / " + m.jumpStrengthMax);
             }
+            
             if(m.jumping){
-                Vector2 jumpdir = m.getMoveDir().cpy().scl(m.jumpStrength);
-    
-                m.getVel().add(jumpdir.x, jumpdir.y, m.jumpStrength/m.getWeight());
-                this.sumdtJump = 0;
+                m.getEntity().setAirborne(true);
+                m.getVel().add(
+                        new Vector3(
+                        m.getMoveDir().x,
+                        m.getMoveDir().y,
+                        m.jumpStrength).nor().scl(m.jumpStrength)
+                );
+                m.sumdtJump = 0;
                 m.jumpStrength = 0;
                 m.jumping = false;
             }
-        
-            
             
             if(m.attacking){
                 int dmg = (int)(m.drawStrength * 2f);
-                this.sumdtDraw 		= 0;
+                m.sumdtDraw 		= 0;
                 m.drawStrength 	= 0;
                 m.attacking = false;
-            } else {
-            
             }
+    
+            if(!m.getEntity().isAirborne()){
+                if (m.sprinting) {
+                    m.sumdtSprint += dt;
+                    m.getPos().add(
+                            m.getMoveDir().x*m.getMoveSpeed()*m.getSprintMultiplier()*dt,
+                            m.getMoveDir().y*m.getMoveSpeed()*m.getSprintMultiplier()*dt,
+                            0);
+                }
+                else{
+                    m.getPos().add(
+                        m.getMoveDir().x*m.getMoveSpeed()*dt,
+                        m.getMoveDir().y*m.getMoveSpeed()*dt,
+                        0);
+                }
+            }
+            else {
+                m.getPos().x += m.getMoveDir().x*m.getMoveSpeed()*dt;
+                m.getPos().y += m.getMoveDir().y*m.getMoveSpeed()*dt;
+            }
+            
         }
         
     }

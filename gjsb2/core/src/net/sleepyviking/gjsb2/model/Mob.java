@@ -1,10 +1,15 @@
 package net.sleepyviking.gjsb2.model;
 
+import com.badlogic.gdx.math.Vector;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import net.sleepyviking.gjsb2.model.physical.Constants;
 
 public class Mob{
+	
+	public float sumdtDraw;
+	public float sumdtJump;
+	public float sumdtSprint;
 	
 	public float drawStrengthMax;	//Max
 	public float jumpStrengthMax;	//
@@ -19,7 +24,9 @@ public class Mob{
 	
 	Entity entity;
 
-	Vector2 moveDir;
+	Vector3 moveDir;
+
+	
 	float moveSpeed;
 	float sprintMultiplier;
 
@@ -60,7 +67,7 @@ public class Mob{
 		this.INT = INT;
 		this.CHA = CHA;
 		
-		moveDir = new Vector2(0, 0);
+		moveDir = new Vector3(0, 0, 0);
 		
 		drawStrengthMax = STR*Constants.drawCoefficient;
 		jumpStrengthMax = STR*Constants.jumpCoefficient;
@@ -76,20 +83,20 @@ public class Mob{
 	}
 	
 	public void setMoveDir(float x, float y) {
-		this.moveDir.set(x, y).nor();
+		this.moveDir.set(x, y, 0).nor().scl(moveSpeed);
 	}
 	
 	public void setMoveY(float y) {
 		this.moveDir.y = y;
-		this.moveDir.nor();
+		this.moveDir.nor().scl(moveSpeed);
 	}
 	
 	public void setMoveX(float x) {
 		this.moveDir.x = x;
-		this.moveDir.nor();
+		this.moveDir.nor().scl(moveSpeed);
 	}
 	
-	public Vector2 getMoveDir() {
+	public Vector3 getMoveDir() {
 		return moveDir;
 	}
 	
@@ -103,7 +110,7 @@ public class Mob{
 	public void setEntity(Entity entity){
 		this.entity = entity;
 	}
-	public void setMoveDir(Vector2 moveDir){
+	public void setMoveDir(Vector3 moveDir){
 		this.moveDir = moveDir;
 	}
 	public void setMoveSpeed(float moveSpeed){
