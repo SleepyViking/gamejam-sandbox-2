@@ -2,6 +2,7 @@ package net.sleepyviking.gjsb2.model.map;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.*;
 import net.sleepyviking.gjsb2.model.Entity;
 import net.sleepyviking.gjsb2.model.Player;
@@ -23,7 +24,7 @@ public class Map {
 	private int tileDimX, tileDimY;
 
 	private int[][] tiles; //tiles[0] = a 1dim array of all the tiles on the 0th layer.
-
+	
 	private TileSet tileSet;
 	private String tileSetFile;
 
@@ -57,6 +58,24 @@ public class Map {
 
 	public Tile getTileAt(int x, int y, int z){
 		return tileSet.get(tiles[z][mapDimX*y + x]);
+	}
+	
+	
+	public boolean tileSolid(Vector3 pos){
+		int tileFromXY;
+		if(pos.y < 0 || pos.x < 0 || pos.y > mapDimY || pos.x > mapDimX){
+			return false;
+		} else{
+			tileFromXY = (int)(mapDimY - (pos.y+0.5))*mapDimX + (int)(pos.x+0.5f);
+			
+			for (int z = 0; z < numLayers; z++){
+				if(tileSet.get(tiles[z][tileFromXY]).isFloor()){
+					return true;
+					//Todo AAA See WorldRenderer.java
+				}
+			}
+		}
+		return false;
 	}
 
 	public void randomize(){

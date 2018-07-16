@@ -10,7 +10,7 @@
   "isMob":true,
   "moveSpeed":2.3,
   "sprintMultiplier":1.6,
-  "jumpHeight":0.3,
+  "weight":0.5,
   "health":10,
   "level":1,
   "STR":-2,

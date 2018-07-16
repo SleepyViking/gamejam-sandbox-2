@@ -15,6 +15,7 @@ public class World {
 
 	public Map map;
 	public Array<Entity> entities = new Array<Entity>();
+	public Array<Mob> mobs = new Array<Mob>();
 	private Player player;
 
 	public World(){
@@ -35,11 +36,6 @@ public class World {
 
 	public Player getPlayer(){
 		return player;
-	}
-
-	public void addEntity(Entity e){
-		this.entities.add(e);
-		System.out.println("Added " + e);
 	}
 
 

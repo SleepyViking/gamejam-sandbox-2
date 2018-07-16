@@ -18,7 +18,6 @@ public class ScreenGame extends ScreenBase{
 
     //initializing world variables
     public ScreenGame(Game game){
-
         world = new World();
         worldController = new WorldController(world);
         worldRenderer = new WorldRenderer(world);
@@ -27,7 +26,6 @@ public class ScreenGame extends ScreenBase{
     //rendering world variables
     @Override
     public void render(float delta){
-
         if(delta < 0.05f){
             worldController.update(delta);
             worldRenderer.render();

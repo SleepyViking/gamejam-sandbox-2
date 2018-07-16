@@ -16,6 +16,7 @@ public class TileSet {
 	JsonValue tiles;
 	int dimx, dimy;
 	
+	
 	public TileSet(String filename){
 		JsonValue tmp;
 		jsonReader = new JsonReader();
@@ -26,13 +27,22 @@ public class TileSet {
 		dimy = jsonBase.getInt("dimy");
 		tileSet = new Array<Tile>(tiles.size);
 		
+		boolean damage, floor, wall;
+		
 		for (int i = 0; i < tiles.size; i++){
 			tmp = tiles.get(i);
-			tileSet.add(new Tile(texture, tmp.getInt("x"), tmp.getInt("y"), dimx, dimy));
+			damage  = 	tmp.has("damage") 		? tmp.getBoolean("damage") 	: false;
+			floor   =	tmp.has("floor") 		? tmp.getBoolean("floor") 	: true;
+			wall   	=	tmp.has("wall") 		? tmp.getBoolean("wall") 	: false;
+			tileSet.add(new Tile(texture, tmp.getInt("x"), tmp.getInt("y"), dimx, dimy, damage, floor, wall));
 		}
 
 	}
 	
+	public boolean safeGetBoolean(String property, JsonValue jv){
+		if(jv.has(property)) return jv.getBoolean(property);
+		else return false;
+	}
 
 	public int getSize(){
 		return tileSet.size;

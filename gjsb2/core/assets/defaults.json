@@ -7,6 +7,7 @@
   "vx":0.0, "vy":0.0,
   "sizex":1.0, "sizey":1.0,
   "isMob":false,
+  "weight":-1,
   "moveSpeed":0,
   "sprintMultiplier":0,
   "jumpHeight":0,

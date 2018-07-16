@@ -26,23 +26,23 @@ public class WorldController extends Controller{
 		this.world.map = new Map(new FileHandle("world1.json"));
 
 		Player player;
-
-
+		
 		setEntityController(new EntityController());
+		entityController.world = world;
+		
+		
 		setMobController(new MobController());
+		
 		loadEntities();
 		player = world.map.getPlayer();
 
 		setPlayerController(new PlayerController(player));
-
+		playerController.setCameraController(cameraController);
+		playerController.setEntityController(entityController);
+		
 		world.setPlayer(player);
-
-		world.entities = getEntityController().entities;
-
-		//addEntity(player);
-
-
-
+		world.entities 	= entityController.entities;
+		world.mobs 		= mobController.mobs;
 
 		cameraController = new CameraController(world);
 	}
@@ -70,11 +70,6 @@ public class WorldController extends Controller{
 	public void setEntityController(EntityController entityController) {
 		this.entityController = entityController;
 	}
-
-	 public void addEntity(Entity e){
-		entityController.addEntity(e);
-		world.addEntity(e);
-	 }
 
 	 public void loadEntities(){
 		 entityController.loadEntities(world.map, mobController);

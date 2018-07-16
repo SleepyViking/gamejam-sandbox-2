@@ -3,16 +3,22 @@ package net.sleepyviking.gjsb2.controller;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 import net.sleepyviking.gjsb2.model.Entity;
 import net.sleepyviking.gjsb2.model.Mob;
 import net.sleepyviking.gjsb2.model.Player;
+import net.sleepyviking.gjsb2.model.World;
 import net.sleepyviking.gjsb2.model.map.Map;
+import net.sleepyviking.gjsb2.model.map.Tile;
+import net.sleepyviking.gjsb2.model.physical.Constants;
 
 public class EntityController extends Controller {
 
+	World world;
+	
 	protected Array<Entity> entities;
 
 	public EntityController(){
@@ -25,7 +31,18 @@ public class EntityController extends Controller {
 		for (int i = 0; i < entities.size; i++) {
 			e = entities.get(i);
 			e.getPos().add(e.getVel().scl(dt));
-
+			
+			if((e.getPos().z > 0f) || !world.map.tileSolid(e.getPos())){
+				e.setAirborne(true);
+			} else if(world.map.tileSolid(e.getPos()) && (e.getPos().z == 0 || (e.getPos().z + e.getVel().z*dt < 0 && e.getPos().z > 0))){
+				e.setAirborne(false);
+			}
+			
+			if(e.isAirborne()){
+				e.getVel().z += Constants.gravity*dt;	//Todo: Make this a variable per map instead of a constant
+			} else {
+				e.getVel().z = 0;
+			}
 		}
 	}
 
@@ -52,7 +69,7 @@ public class EntityController extends Controller {
 		float sizex, sizey;
 		float moveSpeed = 0.0f;
 		float sprintMultiplier = 1.0f;
-		float jumpHeight = 0.0f;
+		float weight = 0.0f;
 		boolean isMob;
 		int health=10, level=1, STR=0, CON=0, DEX=0, WIS=0, INT=0, CHA=0;
 		
@@ -90,14 +107,16 @@ public class EntityController extends Controller {
 			vy = 	loadFloat	("vy"	, 		hierarchy);
 			sizex = loadFloat	("sizex", 		hierarchy);
 			sizey = loadFloat	("sizey", 		hierarchy);
+			weight= loadFloat	("weight", 		hierarchy);
 			
 			Entity e = new Entity(
 					name,
 					texture,
-					new Vector2(x, y),
-					new Vector2(vx, vy),
+					new Vector3(x, y, 0),
+					new Vector3(vx, vy, 0),
 					spriteDimX,
 					spriteDimY,
+					weight,
 					new Vector2(sizex, sizey)
 			);
 			
@@ -105,7 +124,6 @@ public class EntityController extends Controller {
 			if(isMob){
 				moveSpeed = 		loadFloat	("moveSpeed"		, hierarchy);
 				sprintMultiplier = 	loadFloat	("sprintMultiplier"	, hierarchy);
-				jumpHeight = 		loadFloat	("jumpHeight"		, hierarchy);
 				health 	= 			loadInt	("health", 	hierarchy);
 				level 	= 			loadInt	("level", 	hierarchy);
 				STR 	= 			loadInt	("STR"	, 	hierarchy);
@@ -118,7 +136,6 @@ public class EntityController extends Controller {
 				mob = new Mob(	e,
 								moveSpeed,
 								sprintMultiplier,
-								jumpHeight,
 								health,
 								level,
 								STR,
@@ -129,11 +146,12 @@ public class EntityController extends Controller {
 								CHA
 				);
 				
-				if(i != playerIndex) {
-					mobController.addMob(mob);
-				}else{
+				if(i == playerIndex) {
 					Player player = new Player(mob);
 					map.setPlayer(player);
+					mobController.addMob(player);
+				} else{
+					mobController.addMob(mob);
 				}
 			}
 			addEntity(e);

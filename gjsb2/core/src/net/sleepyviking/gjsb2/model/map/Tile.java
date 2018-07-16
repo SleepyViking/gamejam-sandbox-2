@@ -11,17 +11,24 @@ public class Tile {
 	 */
 
 	private boolean
-		damage,
-		wall;
+		damage = false,
+		floor = true,
+		wall = false;
 	
 	TextureRegion textureRegion;
 
-	public Tile(Texture t, int x, int y, int sizex, int sizey){
+	public Tile(Texture t, int x, int y, int sizex, int sizey, boolean damage, boolean floor, boolean wall){
 		textureRegion = new TextureRegion(t, x*sizex, y*sizey, sizex, sizey);
-		System.out.println("a");
+		this.damage = damage;
+		this.floor = floor;
+		this.wall = wall;
 	}
 
 	public TextureRegion getTextureRegion() {
 		return textureRegion;
+	}
+	
+	public boolean isFloor(){
+		return floor;
 	}
 }

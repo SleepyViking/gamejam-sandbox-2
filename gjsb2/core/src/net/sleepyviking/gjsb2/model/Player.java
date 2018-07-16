@@ -9,22 +9,20 @@ import net.sleepyviking.gjsb2.controller.PlayerController;
 public class Player extends Mob{
 	
 	public Player(Mob mob){
-
-		this.entity           = mob.entity;               
-		this.moveSpeed        = mob.moveSpeed;       
-		this.sprintMultiplier = mob.sprintMultiplier;
-		this.jumpHeight       = mob.jumpHeight;      
-		this.health           = mob.health;          
-		this.level            = mob.level;           
-		this.STR              = mob.STR;             
-		this.CON              = mob.CON;             
-		this.DEX              = mob.DEX;             
-		this.WIS              = mob.WIS;             
-		this.INT              = mob.INT;             
-		this.CHA              = mob.CHA;
-		
-		this.moveDir 			= new Vector2(0,0);
-		
+		this.entity           	= mob.entity;
+		this.moveSpeed        	= mob.moveSpeed;
+		this.sprintMultiplier 	= mob.sprintMultiplier;
+		this.health           	= mob.health;
+		this.level            	= mob.level;
+		this.STR              	= mob.STR;
+		this.CON              	= mob.CON;
+		this.DEX              	= mob.DEX;
+		this.WIS              	= mob.WIS;             
+		this.INT              	= mob.INT;
+		this.CHA              	= mob.CHA;
+		this.moveDir 			= mob.moveDir;
+		this.drawStrengthMax = mob.drawStrengthMax;
+		this.jumpStrengthMax = mob.jumpStrengthMax;
 	}
 
 }

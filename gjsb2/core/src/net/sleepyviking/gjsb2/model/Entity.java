@@ -5,17 +5,23 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 
 public class Entity{
 
+	private boolean airborne;
+	private boolean living;
+
 	String name;
 
 	int spriteDimX = 8, spriteDimY = 8;
+	
+	float weight;
 
-	Vector2 pos = new Vector2();
-	Vector2 vel = new Vector2();
+	Vector3 pos = new Vector3();
+	Vector3 vel = new Vector3();
 	Vector2 size = new Vector2(1, 1);
 
 	private Texture texture;
@@ -27,13 +33,14 @@ public class Entity{
 
 	}
 
-	public Entity(				String name,
-								Texture texture,
-								Vector2 pos,
-								Vector2 vel,
-								int spriteDimX,
-								int spriteDimY,
-								Vector2 size)
+	public Entity(	String name,
+					Texture texture,
+					Vector3 pos,
+					Vector3 vel,
+					int spriteDimX,
+					int spriteDimY,
+					float weight,
+					Vector2 size)
 	{
 		this.name = name;
 		this.texture = texture;
@@ -43,27 +50,35 @@ public class Entity{
 		this.spriteDimX = spriteDimX;
 		this.spriteDimY = spriteDimY;
 		this.textureRegion = new TextureRegion(texture, 0, 0, spriteDimX, spriteDimY);
+		this.weight = weight;
 	}
 
 
-	public Entity(Vector2 pos){
-		this.pos = new Vector2();
-		this.vel = new Vector2();
+	public Entity(Vector3 pos){
+		this.pos = new Vector3();
+		this.vel = new Vector3();
 		setPos(pos);
 	}
 
-	public Entity(Vector2 pos, Vector2 vel){
-		this.pos = new Vector2();
-		this.vel = new Vector2();
+	public Entity(Vector3 pos, Vector3 vel){
+		this.pos = new Vector3();
+		this.vel = new Vector3();
 		setPos(pos);
 		setVel(vel);
 	}
-
-	public Vector2 getPos(){
+	
+	public boolean isAirborne(){
+		return airborne;
+	}
+	public void setAirborne(boolean airborne){
+		this.airborne = airborne;
+	}
+	
+	public Vector3 getPos(){
 		return pos;
 	}
 
-	public Vector2 getVel() {
+	public Vector3 getVel() {
 		return vel;
 	}
 
@@ -71,11 +86,11 @@ public class Entity{
 		return size;
 	}
 
-	public void setVel(Vector2 vel) {
+	public void setVel(Vector3 vel) {
 		this.vel.set(vel);
 	}
 
-	public void setPos(Vector2 pos){
+	public void setPos(Vector3 pos){
 		this.pos.set(pos);
 	}
 	//One day, I'll be moving around the game world
@@ -91,8 +106,7 @@ public class Entity{
 		this.spriteDimY = base.getInt("spriteDimY");
 		this.texture = new Texture(base.getString("spritesheet"));
 	}
-
-
+	
 	@Override
 	public String toString(){
 		return String.format("%18s \tx: %3.2f, y: %3.2f", name, pos.x, pos.y);

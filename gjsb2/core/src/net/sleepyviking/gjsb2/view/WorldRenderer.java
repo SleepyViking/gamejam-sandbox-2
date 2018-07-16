@@ -1,14 +1,13 @@
 package net.sleepyviking.gjsb2.view;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.PerspectiveCamera;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 
 import net.sleepyviking.gjsb2.model.Entity;
+import net.sleepyviking.gjsb2.model.Mob;
 import net.sleepyviking.gjsb2.model.Player;
 import net.sleepyviking.gjsb2.model.World;
 import net.sleepyviking.gjsb2.model.map.Tile;
@@ -16,6 +15,7 @@ import net.sleepyviking.gjsb2.model.map.Tile;
 public class WorldRenderer {
 
     private SpriteBatch spriteBatch;
+    private ShapeRenderer shapeRenderer;
     private PerspectiveCamera camera;
     private Vector2 viewPort;
     private World world;
@@ -28,7 +28,9 @@ public class WorldRenderer {
     
     public void create(){
         spriteBatch = new SpriteBatch();
+        shapeRenderer = new ShapeRenderer();
         camera = world.getCamera();
+        
         viewPort = new Vector2(world.getViewport());
         //camera.setToOrtho(false, viewPort.x, viewPort.y);
         camera.position.set(10f, 10f, 3f);
@@ -44,6 +46,7 @@ public class WorldRenderer {
         
         
         spriteBatch.setProjectionMatrix(camera.combined);
+        shapeRenderer.setProjectionMatrix(camera.combined);
         
         {spriteBatch.begin();
         
@@ -51,10 +54,46 @@ public class WorldRenderer {
             renderWorld();
             renderEntities();
             
+            
         spriteBatch.end();}
+        
+        renderDebug();
 
     }
-
+    
+    private void renderDebug(){
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Point);
+        shapeRenderer.setColor(Color.WHITE);
+        for (Entity e : world.entities){
+            shapeRenderer.point(e.getPos().x, e.getPos().y, e.getPos().z);
+        }
+        
+        shapeRenderer.end();
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+        
+            for(Mob m : world.mobs){
+                shapeRenderer.setColor(Color.GREEN);
+                shapeRenderer.line(m.getPos().x,
+                                   m.getPos().y,
+                                   m.getPos().z+1.0f,
+                                   m.getPos().x + m.getVel().x*1.0f,
+                                   m.getPos().y + m.getVel().y*1.0f,
+                                   m.getPos().z+1.0f + m.getVel().z*1.0f
+                                   );
+    
+                shapeRenderer.setColor(Color.RED);
+                shapeRenderer.line(m.getPos().x,
+                                   m.getPos().y,
+                                   m.getPos().z+0.1f,
+                                   m.getPos().x + m.getVel().x*1.0f,
+                                   m.getPos().y + m.getVel().y*1.0f,
+                                   m.getPos().z+0.1f + m.getVel().z*1.0f
+                );
+                
+            }
+        shapeRenderer.end();
+    }
+    
     public void renderWorld(){
 
         spriteBatch.setColor(0.8f,0.7f,0.9f,1);
@@ -64,11 +103,12 @@ public class WorldRenderer {
                 for (int z = 0; z < world.map.getNumLayers(); z++) {
                 spriteBatch.draw(
                         world.map.getTileAt(x, y, z).getTextureRegion(),
-                        x,
-                        world.map.getDimy()-y, 1 , 1);
-                
+                        x-0.5f,
+                        world.map.getDimy()-(y+1.5f), 1 , 1);
+                    //offset by0.5 so that center of tile 0,0 is at origin.
+                    
                     /*
-                     *  TODO: revert when we get map editing working;
+                     *  TODO: AAA revert when we get map editing working;
                      *  as it is, (x, y, 1, 1) renders the map in the json file upside-down.
                      *  (x, dimy-y, 1, 1) gives a right-side up map and positive values, but
                      *  this is unnecessary if we make a tool that writes the lines of the json in reverse order.
@@ -85,7 +125,7 @@ public class WorldRenderer {
         for (Entity e: world.entities) {
             spriteBatch.draw(e.textureRegion,
                     e.getPos().x-e.getSize().x/2f,
-                    e.getPos().y+e.getSize().y,
+                    e.getPos().y,
                     e.getSize().x,
                     e.getSize().y);
         }
