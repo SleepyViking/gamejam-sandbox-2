@@ -28,13 +28,16 @@ public class TileSet {
 		tileSet = new Array<Tile>(tiles.size);
 		
 		boolean damage, floor, wall;
+		float height, friction;
 		
 		for (int i = 0; i < tiles.size; i++){
 			tmp = tiles.get(i);
 			damage  = 	tmp.has("damage") 		? tmp.getBoolean("damage") 	: false;
 			floor   =	tmp.has("floor") 		? tmp.getBoolean("floor") 	: true;
 			wall   	=	tmp.has("wall") 		? tmp.getBoolean("wall") 	: false;
-			tileSet.add(new Tile(texture, tmp.getInt("x"), tmp.getInt("y"), dimx, dimy, damage, floor, wall));
+			height  =	tmp.has("height") 		? tmp.getFloat("height") 	: 0.0f;
+			friction  =	tmp.has("friction") 	? tmp.getFloat("friction") 	: 0.99999f; //max 1.0f
+			tileSet.add(new Tile(texture, tmp.getInt("x"), tmp.getInt("y"), dimx, dimy, damage, floor, wall, height, friction));
 		}
 
 	}

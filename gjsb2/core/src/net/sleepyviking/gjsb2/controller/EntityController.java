@@ -28,8 +28,43 @@ public class EntityController extends Controller {
 	@Override
 	public void update(float dt) {
 		Entity e;
+		Tile topTile;
+		boolean tileSolid, tileWall;
 		for (int i = 0; i < entities.size; i++) {
 			e = entities.get(i);
+			
+			
+			tileSolid = world.map.tileSolid(e.getPos());
+			tileWall = world.map.tileWall(
+					new Vector3(
+						e.getPos().x + e.getVel().x*dt,
+						e.getPos().y + e.getVel().y*dt,
+						e.getPos().z + e.getVel().z*dt
+					)
+			);
+			
+			topTile = world.map.getHighestTile(e.getPos().x, e.getPos().y);
+			
+			if(!tileSolid || (e.getPos().z > topTile.getHeight())){
+				e.setAirborne(true);
+			} else if(e.getPos().z + e.getVel().z*dt <= topTile.getHeight()){
+				e.setAirborne(false);
+			}
+			
+			if(tileWall){
+				e.getVel().x = 0;
+				e.getVel().y = 0;
+			}
+			
+			
+			if(e.isAirborne()){
+				e.getVel().z += Constants.gravity*dt;	//Todo: Make this a variable per map instead of a constant
+			} else {
+				if (e.getPos().z < topTile.getHeight()) e.getPos().z = topTile.getHeight();
+				e.getVel().x = 0; // *= (1.0f - topTile.getFriction()*dt);
+				e.getVel().y = 0; // *= (1.0f - topTile.getFriction());
+				e.getVel().z = 0;
+			}
 			
 			e.getPos().add(
 					e.getVel().x*dt,
@@ -37,19 +72,7 @@ public class EntityController extends Controller {
 					e.getVel().z*dt
 			);
 			
-			if(!world.map.tileSolid(e.getPos()) || (e.getPos().z > 0f)){
-				e.setAirborne(true);
-			} else if(world.map.tileSolid(e.getPos()) && (e.getPos().z == 0 || (e.getPos().z + e.getVel().z*dt <= 0))){
-				e.setAirborne(false);
-			}
-			
-			if(e.isAirborne()){
-				e.getVel().z += Constants.gravity*dt;	//Todo: Make this a variable per map instead of a constant
-			} else {
-				if (e.getPos().z < 0) e.getPos().z = 0;
-				e.getVel().setZero();
-			}
-			
+			e.getDecal().setPosition(e.getPos());
 
 		}
 	}

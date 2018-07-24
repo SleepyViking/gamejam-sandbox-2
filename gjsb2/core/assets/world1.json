@@ -146,7 +146,7 @@
       "vx":0.0, "vy":0.0,
       "sizex":1.0, "sizey":1.0,
 
-      "moveSpeed":3.0,
+      "moveSpeed":2.0,
       "sprintMultiplier":1.75,
 
       "isMob":true

@@ -4,6 +4,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g3d.decals.Decal;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.JsonReader;
@@ -13,6 +14,8 @@ public class Entity{
 
 	private boolean airborne;
 	private boolean living;
+	
+	private Decal decal;
 
 	String name;
 
@@ -40,8 +43,7 @@ public class Entity{
 					int spriteDimX,
 					int spriteDimY,
 					float weight,
-					Vector2 size)
-	{
+					Vector2 size){
 		this.name = name;
 		this.texture = texture;
 		this.setPos(pos);
@@ -51,6 +53,10 @@ public class Entity{
 		this.spriteDimY = spriteDimY;
 		this.textureRegion = new TextureRegion(texture, 0, 0, spriteDimX, spriteDimY);
 		this.weight = weight;
+		
+		this.decal = Decal.newDecal(textureRegion, true);
+		this.decal.setDimensions(size.x, size.y);
+		
 	}
 
 
@@ -111,5 +117,8 @@ public class Entity{
 	public String toString(){
 		return String.format("%18s \tx: %3.2f, y: %3.2f", name, pos.x, pos.y);
 	}
-
+	
+	public Decal getDecal(){
+		return decal;
+	}
 }

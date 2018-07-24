@@ -59,6 +59,28 @@ public class Map {
 	public Tile getTileAt(int x, int y, int z){
 		return tileSet.get(tiles[z][mapDimX*y + x]);
 	}
+	public Tile getHighestTile(float x, float y){
+		int tileFromXY;
+		float highest = 0;
+		int highestZ = 0;
+		
+		if(y < 0 || x < 0 || y > mapDimY || x > mapDimX){
+			return null;
+		} else{
+			tileFromXY = (int)(mapDimY - (y+0.5))*mapDimX + (int)(x+0.5f);
+			
+			for (int z = 0; z < numLayers; z++){
+				if(tileSet.get(tiles[z][tileFromXY]).isWall()){
+					if (tileSet.get(tiles[z][tileFromXY]).getHeight() > highest) {
+						highest = tileSet.get(tiles[z][tileFromXY]).getHeight();
+						highestZ = z;
+					}
+				}
+			}
+		}
+		
+		return tileSet.get(tiles[highestZ][tileFromXY]);
+	}
 	
 	
 	public boolean tileSolid(Vector3 pos){
@@ -72,6 +94,23 @@ public class Map {
 				if(tileSet.get(tiles[z][tileFromXY]).isFloor()){
 					return true;
 					//Todo AAA See WorldRenderer.java
+				}
+			}
+		}
+		return false;
+	}
+	
+	public boolean tileWall(Vector3 pos){
+		int tileFromXY;
+		if(pos.y < 0 || pos.x < 0 || pos.y > mapDimY || pos.x > mapDimX){
+			return false;
+		} else{
+			tileFromXY = (int)(mapDimY - (pos.y+0.5))*mapDimX + (int)(pos.x+0.5f);
+			
+			for (int z = 0; z < numLayers; z++){
+				if(tileSet.get(tiles[z][tileFromXY]).isWall()){
+					return true;
+					//Todo: See above
 				}
 			}
 		}

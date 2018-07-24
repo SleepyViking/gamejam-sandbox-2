@@ -11,7 +11,6 @@ public class MobController{
 
     
     Array<Mob> mobs;
-    
 
     public MobController(){
         mobs = new Array<Mob>();
@@ -19,6 +18,7 @@ public class MobController{
 
 
     public void update(float dt) {
+        
         for (Mob m: mobs){
             if(m.drawing){
                 m.sumdtDraw += dt;
@@ -53,9 +53,10 @@ public class MobController{
                 m.drawStrength 	= 0;
                 m.attacking = false;
             }
-    
-            if(!m.getEntity().isAirborne()){
-                if (m.sprinting) {
+            
+
+            if (!m.getEntity().isAirborne()){
+                if (m.sprinting){
                     m.sumdtSprint += dt;
                     m.getPos().add(
                             m.getMoveDir().x*m.getMoveSpeed()*m.getSprintMultiplier()*dt,
@@ -64,12 +65,12 @@ public class MobController{
                 }
                 else{
                     m.getPos().add(
-                        m.getMoveDir().x*m.getMoveSpeed()*dt,
-                        m.getMoveDir().y*m.getMoveSpeed()*dt,
-                        0);
+                            m.getMoveDir().x*m.getMoveSpeed()*dt,
+                            m.getMoveDir().y*m.getMoveSpeed()*dt,
+                            0);
                 }
             }
-            else {
+            else{
                 m.getPos().x += m.getMoveDir().x*m.getMoveSpeed()*dt;
                 m.getPos().y += m.getMoveDir().y*m.getMoveSpeed()*dt;
             }
